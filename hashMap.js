@@ -75,6 +75,16 @@ class HashMap {
     return keysArr;
   }
 
+  values() {
+    const valuesArr = [];
+    this.map.forEach((bucket) => {
+      for (let i = 0; i < bucket.size(); i++) {
+        valuesArr.push(bucket.at(i).value);
+      }
+    });
+    return valuesArr;
+  }
+
   printMap() {
     this.map.forEach((node, index) => {
       const stringifiedList = node.toString();
@@ -108,6 +118,7 @@ test.set("bajo", "jajo");
 test.printMap();
 console.log(test.length());
 console.log(test.keys());
+console.log(test.values());
 
 // test.clear();
 // test.printMap();
