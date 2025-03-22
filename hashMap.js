@@ -42,8 +42,11 @@ export default class HashMap {
   }
 
   get(key) {
+    if (!this.has(key)) {
+      return null;
+    }
     const bucket = this.getBucket(key);
-    return bucket.contains(key) ? bucket.at(bucket.find(key)).value : null;
+    return bucket.at(bucket.find(key)).value;
   }
 
   has(key) {
@@ -51,11 +54,11 @@ export default class HashMap {
   }
 
   remove(key) {
-    const bucket = this.getBucket(key);
-
-    if (!bucket.contains(key)) {
+    if (!this.has(key)) {
       return false;
     }
+
+    const bucket = this.getBucket(key);
 
     bucket.removeAt(bucket.find(key));
     return true;
