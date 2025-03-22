@@ -31,8 +31,15 @@ class HashMap {
   }
 
   printMap() {
-    return this.map.forEach((node) => {
-      console.log(node.toString());
+    this.map.forEach((node, index) => {
+      const stringifiedList = node.toString();
+
+      console.log(`Bucket: ${index}`);
+      if (stringifiedList === "") {
+        console.log("empty");
+      } else {
+        console.log(stringifiedList);
+      }
     });
   }
 
@@ -47,4 +54,5 @@ const test = new HashMap(16, 0.8);
 test.set("Rama", "Blabla");
 test.set("jestem", "bialy");
 test.set("Rama", "Margaryna");
+test.set("Sita", "Blabla");
 test.printMap();
