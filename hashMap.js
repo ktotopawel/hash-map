@@ -85,6 +85,19 @@ class HashMap {
     return valuesArr;
   }
 
+  entries() {
+    const valuesArr = [];
+    this.map.forEach((bucket) => {
+      for (let i = 0; i < bucket.size(); i++) {
+        const entry = [];
+        entry.push(bucket.at(i).key);
+        entry.push(bucket.at(i).value);
+        valuesArr.push(entry);
+      }
+    });
+    return valuesArr;
+  }
+
   printMap() {
     this.map.forEach((node, index) => {
       const stringifiedList = node.toString();
@@ -104,22 +117,3 @@ class HashMap {
     }
   }
 }
-
-const test = new HashMap(16, 0.8);
-test.set("Rama", "Blabla");
-test.set("jestem", "bialy");
-test.set("Rama", "Margaryna");
-test.set("Sita", "Blabla");
-console.log('GET "Rama": ', test.get("Rama"));
-console.log('contains "jestescie"? ', test.has("jestescie"));
-test.remove("jestem");
-test.set("acab", "baca");
-test.set("bajo", "jajo");
-test.printMap();
-console.log(test.length());
-console.log(test.keys());
-console.log(test.values());
-
-// test.clear();
-// test.printMap();
-// console.log(test.length());
