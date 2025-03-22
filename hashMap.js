@@ -49,6 +49,14 @@ class HashMap {
     return true;
   }
 
+  length() {
+    let count = 0;
+    this.map.forEach((bucket) => {
+      count += bucket.size();
+    });
+    return count;
+  }
+
   printMap() {
     this.map.forEach((node, index) => {
       const stringifiedList = node.toString();
@@ -78,4 +86,7 @@ test.printMap();
 console.log('GET "Rama": ', test.get("Rama"));
 console.log('contains "jestescie"? ', test.has("jestescie"));
 test.remove("jestem");
+test.set("acab", "baca");
+test.set("bajo", "jajo");
 test.printMap();
+console.log(test.length());
