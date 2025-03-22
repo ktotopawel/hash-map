@@ -10,7 +10,6 @@ class HashMap {
 
   hash(key) {
     let code = 0;
-
     const primeNumber = 31;
 
     for (let i = 0; i < key.length; i++) {
@@ -28,6 +27,26 @@ class HashMap {
     } else {
       bucket.append(key, value);
     }
+  }
+
+  get(key) {
+    const bucket = this.map[this.hash(key)];
+    return bucket.contains(key) ? bucket.at(bucket.find(key)).value : null;
+  }
+
+  has(key) {
+    return this.map[this.hash(key)].contains(key);
+  }
+
+  remove(key) {
+    const bucket = this.map[this.hash(key)];
+
+    if (!bucket.contains(key)) {
+      return false;
+    }
+
+    bucket.removeAt(bucket.find(key));
+    return true;
   }
 
   printMap() {
@@ -55,4 +74,8 @@ test.set("Rama", "Blabla");
 test.set("jestem", "bialy");
 test.set("Rama", "Margaryna");
 test.set("Sita", "Blabla");
+test.printMap();
+console.log('GET "Rama": ', test.get("Rama"));
+console.log('contains "jestescie"? ', test.has("jestescie"));
+test.remove("jestem");
 test.printMap();
