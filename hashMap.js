@@ -57,6 +57,14 @@ class HashMap {
     return count;
   }
 
+  clear() {
+    this.map.forEach((bucket) => {
+      for (let i = 0; i < bucket.size(); i++) {
+        bucket.removeAt(i);
+      }
+    });
+  }
+
   printMap() {
     this.map.forEach((node, index) => {
       const stringifiedList = node.toString();
@@ -82,11 +90,13 @@ test.set("Rama", "Blabla");
 test.set("jestem", "bialy");
 test.set("Rama", "Margaryna");
 test.set("Sita", "Blabla");
-test.printMap();
 console.log('GET "Rama": ', test.get("Rama"));
 console.log('contains "jestescie"? ', test.has("jestescie"));
 test.remove("jestem");
 test.set("acab", "baca");
 test.set("bajo", "jajo");
+test.printMap();
+console.log(test.length());
+test.clear();
 test.printMap();
 console.log(test.length());
