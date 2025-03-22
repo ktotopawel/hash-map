@@ -27,6 +27,11 @@ export default class HashMap {
     } else {
       bucket.append(key, value);
     }
+
+    if (this.length() > this.capacity * this.loadFactor) {
+      this.capacity *= 2;
+      this.populateMap();
+    }
   }
 
   get(key) {
