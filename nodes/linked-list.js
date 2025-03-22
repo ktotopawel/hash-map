@@ -1,12 +1,10 @@
-import Node from "./node.js";
-
 export default class LinkedList {
   constructor() {
     (this.head = null), (this.tail = this.head);
   }
 
-  append(value) {
-    const newNode = new Node(value, null);
+  append(key, value) {
+    const newNode = new Node(key, value, null);
 
     if (!this.head) {
       this.addFirst(newNode);
@@ -16,8 +14,8 @@ export default class LinkedList {
     }
   }
 
-  prepend(value) {
-    const newNode = new Node(value, null);
+  prepend(key, value) {
+    const newNode = new Node(key, value, null);
 
     if (!this.head) {
       this.addFirst(newNode);
@@ -28,10 +26,12 @@ export default class LinkedList {
   }
 
   size() {
+    if (!this.head) return 0;
+
     let counter = 0;
     let currentNode = this.head;
 
-    while (currentNode.next !== null) {
+    while (currentNode.next) {
       counter++;
       currentNode = currentNode.next;
     }
@@ -39,6 +39,7 @@ export default class LinkedList {
     return counter + 1; //returns (+1) because the while loop stops before tail
   }
 
+  //returns node with given index
   at(index) {
     let currentNode = this.head;
 
@@ -56,11 +57,11 @@ export default class LinkedList {
     secondToLast.next = null;
   }
 
-  contains(value) {
+  contains(key) {
     let currentNode = this.head;
 
     for (let i = 0; i < this.size(); i++) {
-      if (currentNode.value === value) {
+      if (currentNode.key === key) {
         return true;
       }
       currentNode = currentNode.next;
@@ -69,11 +70,12 @@ export default class LinkedList {
     return false;
   }
 
-  find(value) {
+  //returns index of node with the searched for key
+  find(key) {
     let currentNode = this.head;
 
     for (let i = 0; i < this.size(); i++) {
-      if (currentNode.value === value) {
+      if (currentNode.key === key) {
         return i;
       }
       currentNode = currentNode.next;
@@ -86,7 +88,7 @@ export default class LinkedList {
     let currentNode = this.head;
 
     for (let i = 0; i < this.size(); i++) {
-      stringArr.push("( " + currentNode.value + " )");
+      stringArr.push("( " + currentNode.key + ": " + currentNode.value + " )");
       currentNode = currentNode.next;
     }
 
@@ -111,5 +113,11 @@ export default class LinkedList {
     this.head = newNode;
     this.tail = this.head;
     this.tail.next = null;
+  }
+}
+
+class Node {
+  constructor(key = null, value = null, next = null) {
+    (this.key = key), (this.value = value), (this.next = next);
   }
 }

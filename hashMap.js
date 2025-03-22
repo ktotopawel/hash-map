@@ -16,16 +16,24 @@ class HashMap {
     for (let i = 0; i < key.length; i++) {
       code = (primeNumber * code + key.charCodeAt(i)) % this.capacity;
     }
+
+    return code;
   }
 
   set(key, value) {
     const bucket = this.map[this.hash(key)];
 
-    if (Object.keys(bucket.value).contains(key)) {
-      return false;
+    if (bucket.contains(key)) {
+      bucket.at(bucket.find(key)).value = value;
     } else {
-      bucket.append({ [key]: value });
+      bucket.append(key, value);
     }
+  }
+
+  printMap() {
+    return this.map.forEach((node) => {
+      console.log(node.toString());
+    });
   }
 
   populateMap() {
@@ -38,5 +46,5 @@ class HashMap {
 const test = new HashMap(16, 0.8);
 test.set("Rama", "Blabla");
 test.set("jestem", "bialy");
-
-console.log(test);
+test.set("Rama", "Margaryna");
+test.printMap();
