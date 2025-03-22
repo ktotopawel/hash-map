@@ -128,3 +128,11 @@ class Node {
     (this.key = key), (this.value = value), (this.next = next);
   }
 }
+
+// const test = new LinkedList();
+
+// test.append("apple", "red");
+// test.append("banana", "yellow");
+
+// console.log(test.toString());
+// console.log(test.contains("banana"));

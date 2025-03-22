@@ -8,6 +8,13 @@ export default class HashMap {
     this.populateMap();
   }
 
+  getBucket(key) {
+    for (let bucket of this.map) {
+      if (bucket.contains(key)) return bucket;
+    }
+    return null;
+  }
+
   hash(key) {
     let code = 0;
     const primeNumber = 31;
@@ -20,11 +27,11 @@ export default class HashMap {
   }
 
   set(key, value) {
-    const bucket = this.map[this.hash(key)];
-
-    if (bucket.contains(key)) {
+    if (this.has(key)) {
+      const bucket = this.getBucket(key);
       bucket.at(bucket.find(key)).value = value;
     } else {
+      const bucket = this.map[this.hash(key)];
       bucket.append(key, value);
     }
 
@@ -35,16 +42,16 @@ export default class HashMap {
   }
 
   get(key) {
-    const bucket = this.map[this.hash(key)];
+    const bucket = this.getBucket(key);
     return bucket.contains(key) ? bucket.at(bucket.find(key)).value : null;
   }
 
   has(key) {
-    return this.map[this.hash(key)].contains(key);
+    return this.getBucket(key) ? true : false;
   }
 
   remove(key) {
-    const bucket = this.map[this.hash(key)];
+    const bucket = this.getBucket(key);
 
     if (!bucket.contains(key)) {
       return false;
