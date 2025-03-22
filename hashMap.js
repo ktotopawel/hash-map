@@ -65,6 +65,16 @@ class HashMap {
     });
   }
 
+  keys() {
+    const keysArr = [];
+    this.map.forEach((bucket) => {
+      for (let i = 0; i < bucket.size(); i++) {
+        keysArr.push(bucket.at(i).key);
+      }
+    });
+    return keysArr;
+  }
+
   printMap() {
     this.map.forEach((node, index) => {
       const stringifiedList = node.toString();
@@ -97,6 +107,8 @@ test.set("acab", "baca");
 test.set("bajo", "jajo");
 test.printMap();
 console.log(test.length());
-test.clear();
-test.printMap();
-console.log(test.length());
+console.log(test.keys());
+
+// test.clear();
+// test.printMap();
+// console.log(test.length());
